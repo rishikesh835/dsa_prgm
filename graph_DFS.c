@@ -16,11 +16,10 @@ void DFS(int i){
     visited[i]=1;
     for (int j = 0; j < 7; j++)
     {
-        if(a[i][j]==1 && visited[j]==0){
+        if(a[i][j] == 1 && visited[j] == 0){
             DFS(j);
         }
     }
-    
 }
 int main(){
    //DFS implementation
