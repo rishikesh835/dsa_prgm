@@ -22,9 +22,61 @@ void __f (const char* names, Arg1&& arg1, Args&&... args)
     const char* comma = strchr (names + 1, ',');
     cout.write (names, comma - names) << " : " << arg1 << " | "; __f (comma + 1, args...);
 }
+vector<int> topoSort(int V, vector<vector<int>> adj)
+{
+    // code here
+    vector<int> ans;
+    vector<int> indegree(V,0);
+    vector<bool> visited(V, false);
+    for (int i = 0; i < V; i++)
+    {
+        for (auto nbr : adj[i])
+        {
+            indegree[nbr]++;
+        }
+    }
+    queue<int> q;
+    for (int i = V -1; i >= 0; i--)
+    {
+        if (indegree[i] == 0)
+        {
+            q.push(i);
+        }
+    }
+    if (q.empty())
+    {
+        return {};
+    }
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+        visited[node] = true;
+        ans.push_back(node);
+        for (int nbr : adj[node])
+        {
+            indegree[nbr]--;
+            if (indegree[nbr] == 0 && !visited[nbr])
+                q.push(nbr);
+        }
+    }
 
+    // for(int i = 0;i < V; i++){
+    //      if(!visited[i]) return {};
+    //  }
+    for (int i = 0; i < ans.size(); i++)
+        cout << ans[i] << " ";
+    return ans;
+}
 int main(){
     fast_io;
-    
+    int V = 4;
+    vector<vector<int>> graph = {
+        {},
+        {0},
+        {0},
+        {0}
+    };
+    vector<int> vec = topoSort(V,graph);
     return 0;
 }

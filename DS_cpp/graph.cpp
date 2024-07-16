@@ -35,7 +35,7 @@ class Graph{
 
         while(!q.empty()){
             int f = q.front();
-            cout<< f<< endl;
+            cout<< f<<",";
             q.pop();
 
             for(auto nbr: l[f]){
@@ -61,26 +61,8 @@ class Graph{
         bool *visited = new bool[V]{0};
         dfsHelper(source,visited);
     }
-    int dijkstra(int src, int dest) {
-        //Data structures 
-        vector<int> dist(V,INT_MAX);
-        set<pair<int,int>> s;
-
-        //l,Init
-        dist[src] = 0;
-        s.insert({0,src});
-        while(!s.empty()){
-            auto it = s.begin();
-            int node = it->second;
-            int nodeDist = it->first;
-            s.erase(it);
-            //iterate over the neighbors of node
-            for (auto nbrPair : l[node]){
-                
-            }
-        }
-
-    }
+    //will need to decalre a weighted graph
+    
 };
 int main(){
     Graph g(6);
@@ -92,9 +74,9 @@ int main(){
     g.addEdge(2,3);
     g.addEdge(3,5);
     g.printAdjList();
-
+    cout<<"bfs\n";
     g.bfs(1);
-    cout<<"dfs"<<"\n";
+    cout<<"\n"<<"dfs"<<"\n";
     g.dfs(1);
     return 0;
 }

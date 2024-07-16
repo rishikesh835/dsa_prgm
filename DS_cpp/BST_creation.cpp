@@ -46,6 +46,14 @@ Node *findMin(Node *root){
     }
     return root;
 }
+Node *findMax(Node *root)
+{
+    while (root->right != NULL)
+    {
+        root = root->right;
+    }
+    return root;
+}
 Node *remove(Node *root,int key) {
     if(root == NULL){
         return NULL;
@@ -74,9 +82,13 @@ Node *remove(Node *root,int key) {
             delete temp;
         }
         else {
-            Node * temp = findMin(root->right);
+            // Node * temp = findMin(root->right);
+            // root->key = temp->key;
+            // root->right = remove(root-right,temp->key);
+            
+            Node * temp = findMax(root->left);
             root->key = temp->key;
-            root->right = remove(root->right,temp->key);
+            root->left = remove(root->left,temp->key);
         }
     }
     return root;
